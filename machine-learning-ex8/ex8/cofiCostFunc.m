@@ -41,18 +41,19 @@ Theta_grad = zeros(size(Theta));
 %
 
 
+J = (1/2) * sum( ((X*Theta' - Y).^2)(R==1) );
+
+#regularazing the cost 
+J = J + lambda*sum(sum(Theta.^2))/2; 
+J = J + lambda*sum(sum(X.^2))/2;
 
 
+Theta_grad = ((X*Theta'-Y).*R)' * X;
+X_grad = ((X*Theta'-Y).*R) * Theta;
 
-
-
-
-
-
-
-
-
-
+#regularizing the gradient
+Theta_grad = Theta_grad + (lambda * Theta);
+X_grad = X_grad + (lambda * X); 
 
 
 % =============================================================
